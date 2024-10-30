@@ -121,6 +121,7 @@
 
     [Parameter] public Article Article { get; set; }
     [Parameter] public bool IsCode { get; set; }
+    [Parameter] public int CourseId { get; set; }
 
     private List<Block> BlocksToShow = new();
     private bool IsLoggedIn;
@@ -201,7 +202,7 @@
 
     private void NavigateToArticle(int articleDisplayId, int articleId, bool isCode)
     {
-        NavigationManager.NavigateTo($"/course/1/article/{Article.CourseDisplayId}/{Article.Id}/{isCode}", forceLoad: true);
+        NavigationManager.NavigateTo($"/course/{CourseId}/article/{Article.CourseDisplayId}/{Article.Id}/{isCode}", forceLoad: true);
     }
 }
 
