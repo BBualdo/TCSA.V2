@@ -211,7 +211,7 @@
         .Where(x => !CompletedProjects.Contains(x))
         .ToList();
 
-        WebAPICompleted = !webAPIArticleIds.Any();
+        WebAPICompleted = !incompleteWebAPICourseIds.Any();
 
         OOPTasks = $"You've completed <b>{oopArticleIds.Count() - incompleteOopIds.Count()} out of {oopArticleIds.Count()}</b> chapters.";
         WebAPITasks = $"You've completed <b>{webAPIArticleIds.Count() - incompleteWebAPICourseIds.Count()} out of {webAPIArticleIds.Count()}</b> chapters.";
