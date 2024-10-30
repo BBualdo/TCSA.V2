@@ -16,7 +16,7 @@
                     bool isCompleted = CompletedProjects.Contains(article.Id);
 
                     <li class="article-item @(isCompleted ? "completed" : "")">
-                        <a href="" @onclick="() => NavigateToArticle(article.CourseDisplayId.Value, article.Id)"
+                        <a href="" @onclick:preventDefault @onclick="() => NavigateToArticle(article.CourseDisplayId.Value, article.Id)"
                            class="block px-4 py-9 rounded-lg text-gray-800 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200 ease-in-out
                            @(article.Id == ArticleId ? "active" : "")">
                             <span class="course-index">@article.CourseDisplayId.</span> @article.Title
