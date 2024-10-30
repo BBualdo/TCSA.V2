@@ -126,6 +126,7 @@
         projectCompleted = true;
 
         availableProjects = await PeerReviewService.GetProjectsForPeerReview(userId);
+        User = await PeerReviewService.GetUserForPeerReview(userId);
     }
 
     private async Task AssignMyself(int id)
@@ -135,6 +136,7 @@
         userAssigned = true;
 
         availableProjects = await PeerReviewService.GetProjectsForPeerReview(userId);
+        User = await PeerReviewService.GetUserForPeerReview(userId);
     }
 
     private async Task ReleaseMyself(int id)
@@ -144,6 +146,7 @@
         userReleased = true;
 
         availableProjects = await PeerReviewService.GetProjectsForPeerReview(userId);
+        User = await PeerReviewService.GetUserForPeerReview(userId);
     }
 
     private bool CheckIfAssigned(int id)
