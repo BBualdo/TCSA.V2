@@ -2541,7 +2541,7 @@ git push</code>"
                         {
                             new Paragraph
                             {
-                                Body = "<b>Grouping Methods by Concern</b>: If you find multiple methods that are related to a particular aspect of your system, such as validation, tax calculation, or logging, it might be a sign that they should be grouped together. When this happens, creating a dedicated class makes sense. This not only makes the code cleaner but also aligns with the **single responsibility principle** (each class should have only one reason to change)."
+                                Body = "<b>Grouping Methods by Concern</b>: If you find multiple methods that are related to a particular aspect of your system, such as validation, tax calculation, or logging, it might be a sign that they should be grouped together. When this happens, creating a dedicated class makes sense. This not only makes the code cleaner but also aligns with the single responsibility principle (each class should have only one reason to change)."
                             },
                             new Paragraph
                             {

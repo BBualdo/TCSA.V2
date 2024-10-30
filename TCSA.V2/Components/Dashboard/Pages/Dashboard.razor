@@ -86,6 +86,18 @@
             </div>
             }
 
+            @if (!WebAPICompleted)
+            {
+                <div class="col-12 m-1 pe-4 mt-1">
+                    <DashboardAreaCard CardName="Intro to ASP.NET Core Web APIs"
+                                       HasButton="false"
+                                       IconUrl="icons8-internet-64.png"
+                                       Description="<a target='_blank' href='course/3/article/1/500050/false'>Check out our brand new crash course!</a> and get 15XPs"
+                                       Tasks=@WebAPITasks />
+
+                </div>
+            }
+
             @if(State == Enums.DashboardState.Area)
             {
                 @foreach (var area in Areas.Where(a => !a.IsHidden))
@@ -146,11 +158,13 @@
     private bool IsLoggedIn = false;
     private bool ShowBeltNotification = false;
     private bool OOPCompleted = false;
+    private bool WebAPICompleted = false;
     private Enums.DashboardState State = Enums.DashboardState.Area;
     private int Ranking;
     private bool IsPendingProjectButtonClicked = false;
     private bool IsCompletedProjectButtonClicked = false;
     private string OOPTasks;
+    private string WebAPITasks;
     private List<DashboardAreaInfo> Areas = new();
     private List<Article>? Articles;
     private IEnumerable<Project> Projects;
@@ -163,9 +177,12 @@
     {
         Articles = ArticleHelper.GetArticles().ToList();
         Projects = ProjectHelper.GetProjects().Where(x => x.IsClosed == false);
-        var courseArticles = CourseHelper.GetCourses().Where(x => x.Id == 1).SelectMany(x => x.Articles).ToList();
-        Articles.AddRange(courseArticles);
-        var courseArticleIds = courseArticles.Select(x => x.Id).ToArray();
+        var oopArticles = CourseHelper.GetCourses().Where(x => x.Id == 1).SelectMany(x => x.Articles).ToList();
+        var webAPIArticles = CourseHelper.GetCourses().Where(x => x.Id == 3).SelectMany(x => x.Articles).ToList();
+        Articles.AddRange(oopArticles);
+        Articles.AddRange(webAPIArticles);
+        var oopArticleIds = oopArticles.Select(x => x.Id).ToArray();
+        var webAPIArticleIds = webAPIArticles.Select(x => x.Id).ToArray();
 
         var AuthSate = await AuthenticationState.GetAuthenticationStateAsync();
 
@@ -186,13 +203,20 @@
         CompletedPendingNotificationProjects = User?.DashboardProjects?.Where(x => x.IsPendingNotification).Select(x => x.ProjectId).ToList();
         CompletedPendingNotificationIssues = await CommunityService.GetIssuesTitles(CompletedPendingNotificationProjects);
 
-        var incompleteOopIds = courseArticleIds
-    .Where(x => !CompletedProjects.Contains(x))
-    .ToList();
+        var incompleteOopIds = oopArticleIds
+        .Where(x => !CompletedProjects.Contains(x))
+        .ToList();
 
-        OOPTasks = $"You've completed <b>{courseArticleIds.Count() - incompleteOopIds.Count()} out of {courseArticleIds.Count()}</b> chapters.";
+        OOPCompleted = !incompleteOopIds.Any();
 
-        OOPCompleted = incompleteOopIds.Count == 0;
+        var incompleteWebAPICourseIds = webAPIArticleIds
+        .Where(x => !CompletedProjects.Contains(x))
+        .ToList();
+
+        WebAPICompleted = !webAPIArticleIds.Any();
+
+        OOPTasks = $"You've completed <b>{oopArticleIds.Count() - incompleteOopIds.Count()} out of {oopArticleIds.Count()}</b> chapters.";
+        WebAPITasks = $"You've completed <b>{webAPIArticleIds.Count() - incompleteWebAPICourseIds.Count()} out of {webAPIArticleIds.Count()}</b> chapters.";
 
         var areaIconUrls = new List<string> { "" };
 
