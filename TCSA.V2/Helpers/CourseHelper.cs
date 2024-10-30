@@ -1350,7 +1350,7 @@ public class CourseHelper
                                     new Paragraph { Body = "Finally modify the bookToDelete variable in DeleteBook():" },
                                    new Paragraph {
                                        IsCode = true,
-                                        Body = "var bookToDelete = AnsiConsole.Prompt(\r\n    new SelectionPrompt&lt;Book&gt;()\r\n        .Title(\"Select a [red]book[/] to delete:\")\r\n        .AddChoices(MockDatabase.Books));" },
+                                        Body = "var bookToDelete = AnsiConsole.Prompt(\r\n    new SelectionPrompt&lt;Book&gt;()\r\n        .Title(\"Select a [red]book[/] to delete:\")\r\n        .UseConverter(b => $\"{b.Name} by {b.Author}\")\r\n        .AddChoices(MockDatabase.Books));" },
                                     new Paragraph { Body = "Run the app and try to add a new book!" },
                                 }
                             },
