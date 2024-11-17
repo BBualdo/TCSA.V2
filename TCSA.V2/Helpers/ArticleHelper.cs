@@ -2796,6 +2796,86 @@ git push</code>"
                     },
                 }
             },
+            new Article
+            {
+                Id = 30008,
+                Title = "Contributing to The C# Academy",
+                IconUrl = "",
+                Slug="contributing-csharp-academy",
+                BannerUrl = "",
+                CardImgUrl = "opensource.png",
+                Description = "",
+                ExperiencePoints = 1,
+                Area = Area.Principles,
+                Blocks = new List<Block>
+                {
+                    new Block
+                    {
+                        Paragraphs = new List<Paragraph>
+                        {
+                            new Paragraph
+                            {
+                                Body = "In this article you'll learn how to contribute to The C# Academy's project. This not only helps maintain the website, but it gives you experience <b>collaborating in an open-source project</b>, which will ultimately make you a better developer. You'll also be required to complete community tasks to achieve all belts above Red, in our <a href='https://www.thecsharpacademy.com/dashboard/roadmap' target='_blank'>Roadmap</a>."
+                            }
+                        }
+                    },
+                    new Block
+                    {
+                        Title = "1. Finding an Issue",
+                        Paragraphs = new List<Paragraph>
+                        {
+                            new Paragraph
+                            {
+                                Body = "You can find pending tasks in <a href='https://github.com/users/TheCSharpAcademy/projects/5/views/1' target='_blank'>The C# Academy's Github</a> Project. You'll see a TCSA Team Issues, which are for the academy's staff only and a Community Issues, which is open to everyone else."
+                            }
+                        }
+                    },
+                    new Block
+                    {
+                        Title = "2. Creating an Issue",
+                        Paragraphs = new List<Paragraph>
+                        {
+                            new Paragraph
+                            {
+                                Body = "If you found a bug or you'd like to propose a change, you can create your own issue. In the bottom of the <b>Community Issues</b> lane, click on + Add Item and give the issue a Title. This will create a new Draft Issue on the board."
+                            }
+                        }
+                    },
+                    new Block
+                    {
+                        Title = "3. Create an Issue in The Academy's Dashboard",
+                        Paragraphs = new List<Paragraph>
+                        {
+                            new Paragraph
+                            {
+                                Body = "At the top of the <a href='https://www.thecsharpacademy.com/dashboard/community' target='_blank'>Community page in the Dashboard</a> Project, click on <b>Create Issue</b>. Select The C# Academy V2, give it a Title, a Type and copy and paste the URL from the github issue into the <b>Issue Url</b> field."
+                            }
+                        }
+                    },
+                    new Block
+                    {
+                        Title = "4. Do work",
+                        Paragraphs = new List<Paragraph>
+                        {
+                            new Paragraph
+                            {
+                                Body = "Navigate to <a href='https://github.com/TheCSharpAcademy/TCSA.V2' target='_blank'>the project's repository</a>, clone it and follow the instructions in the Readme file to run it. Make sure you <b>test your changes thoroughly</b> before moving to the next step. "
+                            }
+                        }
+                    },
+                    new Block
+                    {
+                        Title = "5. Submit a Pull Request",
+                        Paragraphs = new List<Paragraph>
+                        {
+                            new Paragraph
+                            {
+                                Body = "Submit a PR to the repository and wait for a review. Be ready to make changes. More often than not changes will be requested since this is an actual app <b>used by tens of thousands of people</b>. Please include a description of what has changed with screenshots if applicable."
+                            }
+                        }
+                    }
+                }
+            },
         };
     }
 }

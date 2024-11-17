@@ -1,0 +1,131 @@
+﻿@page "/map"
+
+<h3>Map</h3>
+<div class="container text-center">
+    <h2 class="mb-4">Roadmap</h2>
+    <div class="roadmap">
+        <!-- Row 1 -->
+        <div class="node-container">
+            <div class="node" onclick="alert('Node 1 Clicked')">
+                <img src="https://via.placeholder.com/50" alt="Node 1 Image">
+                <div class="node-title">Node 1</div>
+            </div>
+            <div class="dotted-arrow horizontal"></div>
+        </div>
+        <div class="node-container">
+            <div class="node" onclick="alert('Node 2 Clicked')">
+                <img src="https://via.placeholder.com/50" alt="Node 2 Image">
+                <div class="node-title">Node 2</div>
+            </div>
+            <div class="dotted-arrow diagonal-down"></div>
+        </div>
+        <div class="node-container">
+            <div class="node" onclick="alert('Node 3 Clicked')">
+                <img src="https://via.placeholder.com/50" alt="Node 3 Image">
+                <div class="node-title">Node 3</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="roadmap mt-5">
+        <div class="node-container">
+            <div class="dotted-arrow vertical"></div>
+            <div class="node" onclick="alert('Node 4 Clicked')">
+                <img src="https://via.placeholder.com/50" alt="Node 4 Image">
+                <div class="node-title">Node 4</div>
+            </div>
+        </div>
+        <div class="node-container">
+            <div class="dotted-arrow diagonal-up"></div>
+            <div class="node" onclick="alert('Node 5 Clicked')">
+                <img src="https://via.placeholder.com/50" alt="Node 5 Image">
+                <div class="node-title">Node 5</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .roadmap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 2rem 0;
+    }
+
+    .node-container {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .node {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #f8f9fa;
+        border: 2px solid #007bff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+    }
+
+        .node img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+    .node-title {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: #333;
+    }
+
+    .dotted-arrow {
+        background: repeating-linear-gradient( to right, black, black 5px, transparent 5px, transparent 10px );
+    }
+
+    /* Arrow Styles */
+    .horizontal {
+        width: 50px;
+        height: 2px;
+        margin: 0 1rem;
+    }
+
+    .vertical {
+        width: 2px;
+        height: 50px;
+        background: repeating-linear-gradient( to bottom, black, black 5px, transparent 5px, transparent 10px );
+        margin-right: 1rem;
+    }
+
+    .diagonal-down {
+        width: 50px;
+        height: 50px;
+        background: none;
+        border: 2px dotted black;
+        border-width: 2px 0 0 2px;
+        transform: rotate(-45deg);
+        position: relative;
+        top: 25px;
+        margin-left: -25px;
+    }
+
+    .diagonal-up {
+        width: 50px;
+        height: 50px;
+        background: none;
+        border: 2px dotted black;
+        border-width: 0 0 2px 2px;
+        transform: rotate(45deg);
+        position: relative;
+        bottom: 25px;
+        margin-right: -25px;
+    }
+</style>
