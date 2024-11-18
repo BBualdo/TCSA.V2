@@ -4,6 +4,7 @@ public class AppUserActivity
 {
     public int Id { get; set; }
     public int ProjectId { get; set; }
+    public DashboardProject DashboardProject { get; set; }
     public int ChallengeId { get; set; }
     public string AppUserId { get; set; }
     public DateTimeOffset DateSubmitted { get; set; }
