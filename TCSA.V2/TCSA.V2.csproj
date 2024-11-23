@@ -8,6 +8,10 @@
     <UserSecretsId>aspnet-TCSA.V2-5cbb2f6a-8407-46ed-937c-1f93a9b4df27</UserSecretsId>
   </PropertyGroup>
 
+	<PropertyGroup>
+		<EnableDefaultWatchItems>true</EnableDefaultWatchItems>
+	</PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="8.0.0" />
     <PackageReference Include="Bogus" Version="35.5.0" />

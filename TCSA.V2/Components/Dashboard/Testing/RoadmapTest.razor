@@ -21,6 +21,9 @@ else
 {
     <div class="mt-lg-5 pt-lg-3">
         <h1>Load time = @loadTime</h1>
+        <div class="card my-5">
+            <DashboardRoadmapSummary Items="roadmapSummary" />
+        </div>
         <RoadmapCard CardName="Missing Tasks"
                      Tasks=missingTasks
                      Requirements=missingReqs />
@@ -104,8 +107,9 @@ else
 
     private List<Article>? articles;
     private List<Project>? projects;
-    private Project flagshipProject = new();
+    private List<RoadmapSummaryItem> roadmapSummary;
 
+    private Project flagshipProject = new();
     private List<string> missingReqs = new();
 
     private List<RoadmapTask> missingTasks = new();
@@ -136,6 +140,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        int[] numbers1 = [1, 2, 3];
+        int[] numbers2 = new int[3] { 1, 2, 3 };
+        int[] numbers3 = { 1, 2, 3 };
+
+
         var stopwatch = new Stopwatch();
         stopwatch.Start();
 
@@ -181,6 +190,7 @@ else
             GetGreyBeltTasks();
             GetBlueBeltTasks();
             GetBlackBeltTasks();
+            GetRoadmapSummary();
 
             missingReqs.AddRange(new List<string> {  $"Complete these to move up to {(Level)((int)(UserLevel) + 1)}" });
         }
@@ -190,6 +200,40 @@ else
         stopwatch.Stop();
 
         loadTime = stopwatch.Elapsed.TotalSeconds;
+    }
+
+    protected void GetRoadmapSummary()
+    {
+        roadmapSummary = projects.Select(x => new RoadmapSummaryItem
+            {
+                Title = x.Title,
+                Status = completedProjects.Contains(x.Id),
+                Type = RoadmapSummaryItemType.Project
+            }).ToList();
+
+        var codeReviewCount = reviewsCount;
+        for (int i = 0; i < 25; i++)
+        {
+            roadmapSummary.Add(new RoadmapSummaryItem
+                {
+                    Title = $"Code Review {i + 1}",
+                    Status = codeReviewCount > 0,
+                    Type = RoadmapSummaryItemType.CodeReview
+                });
+        }
+        codeReviewCount -= 1;
+
+        var communityProjectsCount = issuesCount;
+        for (int i = 0; i < 25; i++)
+        {
+            roadmapSummary.Add(new RoadmapSummaryItem
+                {
+                    Title = $"Community Project {i + 1}",
+                    Status = communityProjectsCount > 0,
+                    Type = RoadmapSummaryItemType.CommunityProject
+                });
+        }
+        communityProjectsCount -= 1;
     }
 
     protected void GetGreenBeltTasks()
