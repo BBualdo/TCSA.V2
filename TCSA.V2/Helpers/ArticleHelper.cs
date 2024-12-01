@@ -2803,7 +2803,7 @@ git push</code>"
                 IconUrl = "",
                 Slug="contributing-csharp-academy",
                 BannerUrl = "",
-                CardImgUrl = "opensource.png",
+                CardImgUrl = "open-source.jpg",
                 Description = "",
                 ExperiencePoints = 1,
                 Area = Area.Principles,
