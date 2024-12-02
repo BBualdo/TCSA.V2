@@ -4091,7 +4091,7 @@ public class CourseHelper
                             {
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "Data types define the kind of data that can be stored in a column, such as text, numbers, or dates. They play a critical role in ensuring data consistency and optimizing database performance. While SQL as a language supports a wide variety of data types, each database system implements them differently. SQLite uses a more flexible and simplified approach to data types, while SQL Server adheres to strict typing with an extensive set of predefined types.\r\n" }
+                                    new Paragraph { Body = "Data types <b>define the kind of data that can be stored in a column</b>, such as text, numbers, or dates. They play a critical role in ensuring data consistency and optimizing database performance. While SQL as a language supports a wide variety of data types, each database system implements them differently. SQLite uses a more flexible and <b>simplified approach</b> to data types, while SQL Server adheres to strict typing with an extensive set of predefined types.\r\n" }
                                 }
                             },
                             new Block
@@ -4099,7 +4099,7 @@ public class CourseHelper
                                 Title = "Data Types in SQLite",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "SQLite employs dynamic typing, meaning it doesn’t strictly enforce column data types. Instead, it uses type affinities, which are broad categories for data: TEXT, INTEGER, REAL, BLOB, and NULL. For example, a column defined as TEXT can store numbers, text, or even date strings, though SQLite will attempt to interpret and store values in the most appropriate format. This flexibility can simplify development but requires careful handling to avoid inconsistent data."}
+                                    new Paragraph { Body = "SQLite employs dynamic typing, meaning it doesn’t strictly enforce column data types. Instead, it uses type affinities, which are broad categories for data: <b>TEXT, INTEGER, REAL, BLOB, and NULL</b>. For example, a column defined as TEXT can store numbers, text, or even date strings, though SQLite will attempt to interpret and store values in the most appropriate format. This flexibility can simplify development but requires careful handling to avoid inconsistent data."}
                                 }
                             },
                             new Block
@@ -4107,7 +4107,7 @@ public class CourseHelper
                                 Title = "Data Types in SQL Server",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                      new Paragraph { Body = "The widely used SQL Server, in contrast, enforces strict data typing. Columns are explicitly defined with specific types like INT, VARCHAR, DECIMAL, or DATETIME, and only data matching the defined type can be stored. This ensures data integrity and allows for advanced optimizations, especially in large-scale applications. SQL Server also offers a much larger variety of types, including specialized ones like UNIQUEIDENTIFIER for globally unique identifiers or XML for storing structured data." }
+                                      new Paragraph { Body = "The widely used SQL Server, in contrast, enforces strict data typing. Columns are explicitly defined with specific types like <b>INT, VARCHAR, DECIMAL, or DATETIME</b>, and only data matching the defined type can be stored. This ensures data integrity and allows for advanced optimizations, especially in large-scale applications. SQL Server also offers a much larger variety of types, including specialized ones like <b>UNIQUEIDENTIFIER</b> for globally unique identifiers or XML for storing structured data." }
                                 }
                             },
                             new Block
@@ -4116,7 +4116,7 @@ public class CourseHelper
                                 Paragraphs = new List<Paragraph>
                                 {
                                     new Paragraph {
-                                       Body = "The key difference between SQLite and SQL Server lies in their approach to typing. SQLite’s dynamic typing makes it easy to work with data without worrying about strict rules, which is helpful for learning and prototyping. However, it sacrifices some data integrity and precision. SQL Server’s strict typing demands more upfront planning when designing a database, but it ensures that the data remains consistent and predictable, which is crucial for complex systems." },
+                                       Body = "The key difference between SQLite and SQL Server lies in their approach to typing. SQLite’s dynamic typing makes it easy to work with data without worrying about strict rules, which is helpful for learning and prototyping. However, <b>it sacrifices some data integrity and precision</b>. SQL Server’s strict typing demands more upfront planning when designing a database, but it ensures that the data remains consistent and predictable, which is crucial for complex systems." },
                                     new Paragraph {
                                        Body = "As we move forward, understanding these differences will help you choose the right database for your projects and prepare you to adapt your SQL knowledge to different systems. For now, we will focus on SQLite's simpler type system, keeping things accessible and beginner-friendly." },
                                      new Paragraph {
@@ -4132,7 +4132,7 @@ public class CourseHelper
                                     new Paragraph {
                                        BackgroundColor="#1C236D",
                                        FontColor="#FFF",
-                                       Body = "BLOBs for Everything: The BLOB type in SQLite is the ultimate wildcard—it can store any kind of binary data, including images, files, or serialized objects." }
+                                       Body = "BLOBs for Everything: The BLOB type in SQLite is the ultimate wildcard — it can store any kind of binary data, including images, files, or serialized objects." }
                                 }
                             }
                         }
@@ -4152,7 +4152,7 @@ public class CourseHelper
                             {
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "It's time to start writing SQL! In this chapter, we will focus on creating a table for managing products in an e-commerce store. This is one of the core aspects of building a database, as tables store the data for the system. We willexplore how to define the table structure, choose appropriate data types for each column, and understand the relationships between the fields." },
+                                    new Paragraph { Body = "It's time to start writing SQL! In this chapter, we will focus on creating a table for managing products in an e-commerce store. This is one of the core aspects of building a database, as tables store the data for the system. We will explore how to define the table structure, choose appropriate data types for each column, and understand the relationships between the fields." },
                                      new Paragraph {
                                         IsPicture = true,
                                         PictureUrl = "c4-ch4-sql-ecommerce.jpg"}
@@ -4163,29 +4163,19 @@ public class CourseHelper
                                 Title = "Understanding Table Creation",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "A table in SQL consists of rows and columns, where each column holds a specific type of data. To create a table, we use the CREATE TABLE statement, followed by the table name and column definitions. Each column is defined with a name and a corresponding data type. You can also set constraints on the columns to ensure data integrity."},
+                                    new Paragraph { Body = "A table in SQL consists of <b>rows and columns</b>, where each column holds a specific type of data. To create a table, we use the <b>CREATE TABLE</b> statement, followed by the table name and column definitions. Each column is defined with a name and a corresponding data type. You can also set constraints on the columns to ensure data integrity."},
                                     new Paragraph { Body = "Let’s start by creating a simple Products table for an e-commerce store. This table will store basic information about each product available for sale."},
                                     new Paragraph { 
                                         IsCode = true,
                                         Body = "CREATE TABLE Products (\r\n    ProductID INTEGER PRIMARY KEY AUTOINCREMENT,\r\n    ProductName TEXT NOT NULL,\r\n    Description TEXT,\r\n    Price REAL NOT NULL,\r\n    StockQuantity INTEGER NOT NULL,\r\n    DateAdded DATE\r\n);"},
                                     new Paragraph { Body = "Now, let’s break down each part of this table creation in detail:"},
-                                    new Paragraph { Body = "Line 1: CREATE TABLE: This SQL command is used to define a new table in the database. Products: This is the name of the table being created. You can give the table any name you want. The name should be descriptive of the data it will contain. In this case, the table will hold product-related information. "},
-                                    new Paragraph { Body = "Line 2: ProductID INTEGER PRIMARY KEY AUTOINCREMENT. ProductID: This is the name of the column. It serves as a unique identifier for each row in the table. INTEGER: The data type of the column. It specifies that ProductID will store whole numbers. PRIMARY KEY: This keyword designates ProductID as the primary key of the table. A primary key uniquely identifies each row in the table and ensures that no two rows have the same value for this column. AUTOINCREMENT: This ensures that the value of ProductID is automatically incremented by the database each time a new row is added. It starts at 1 and increases sequentially."},
-                                    new Paragraph { Body = "Line 3: ProductName TEXT NOT NULL. ProductName: The name of the column, which will store the name of the product. TEXT: The data type for the column. It specifies that ProductName will store string values (e.g., product names). NOT NULL: This constraint ensures that the ProductName column cannot contain NULL values. A value must be provided for every row."},
-                                    new Paragraph { Body = "Line 4: Description TEXT. Description: The name of the column, which will store additional details about the product. It also has TEXT as its data type."},
-                                    new Paragraph { Body = "Price REAL NOT NULL. Price: The name of the column, which will store the product's price. REAL: The data type for the column. It is used to store floating-point numbers (decimal values). A valid price must always be provided."},
-                                    new Paragraph { Body = "StockQuantity INTEGER NOT NULL. StockQuantity: The name of the column, which will store the number of products available in stock. The data type is integer and cannot contain null values."},
-                                     new Paragraph { Body = "DateAdded DATE. DateAdded: The name of the column, which will store the date when the product was added to the database. The DATE type It is used to store date values (in the format YYYY-MM-DD in most SQL databases).It doesn't have the NOT NULL , meaning it’s optional."},
-
-                                }
-                            },
-                            new Block
-                            {
-                                Title = "Constraints and Data Integrity",
-                                Paragraphs = new List<Paragraph>
-                                {
-                                      new Paragraph { Body = "In SQL, **constraints** are rules applied to the columns in a table to ensure that the data entered into the database adheres to certain conditions. These rules are crucial for maintaining **data integrity**, **accuracy**, and **reliability** within the database. Constraints help enforce the correctness of the data by ensuring that it follows predefined criteria before being saved." },
-                                      new Paragraph { Body = "As shown above, we’ve applied a few constraints to the table:\r\n    - **PRIMARY KEY** on `ProductID`: Ensures uniqueness and helps optimize queries that retrieve a product by its ID.\r\n    - **NOT NULL** on columns like `ProductName`, `Price`, and `StockQuantity`: Ensures that essential data is always provided for every product.\r\n    - **No `NOT NULL` on `Description` and `DateAdded`**: This allows for flexibility, enabling optional information while still keeping the table structured.\r\n" },
+                                    new Paragraph { Body = "<b>Line 1: CREATE TABLE</b>: This SQL command is used to define a new table in the database. Products: This is the name of the table being created. You can give the table any name you want. The name should be descriptive of the data it will contain. In this case, the table will hold product-related information. "},
+                                    new Paragraph { Body = "<b>Line 2: ProductID INTEGER PRIMARY KEY AUTOINCREMENT</b>. ProductID: This is the name of the column. It serves as a <b>unique identifier</b> for each row in the table. INTEGER: The data type of the column. It specifies that ProductID will store whole numbers. PRIMARY KEY: This keyword designates ProductID as the primary key of the table. A primary key uniquely identifies each row in the table and ensures that no two rows have the same value for this column. AUTOINCREMENT: This ensures that the value of ProductID is automatically incremented by the database each time a new row is added. It starts at 1 and increases sequentially."},
+                                    new Paragraph { Body = "<b>Line 3: ProductName TEXT NOT NULL</b>. ProductName: The name of the column, which will store the name of the product. TEXT: The data type for the column. It specifies that ProductName will store string values (e.g., product names). NOT NULL: This constraint ensures that the ProductName column cannot contain NULL values. A value must be provided for every row."},
+                                    new Paragraph { Body = "<b>Line 4: Description TEXT</b>. Description: The name of the column, which will store additional details about the product. It also has TEXT as its data type."},
+                                    new Paragraph { Body = "<b>Line 5: Price REAL NOT NULL</b>. Price: The name of the column, which will store the product's price. REAL: The data type for the column. It is used to store floating-point numbers (decimal values). A valid price must always be provided."},
+                                    new Paragraph { Body = "<b>Line 6: StockQuantity INTEGER NOT NULL</b>. StockQuantity: The name of the column, which will store the number of products available in stock. The data type is integer and cannot contain null values."},
+                                     new Paragraph { Body = "<b>Line 7: DateAdded DATE</b>. DateAdded: The name of the column, which will store the date when the product was added to the database. The DATE type It is used to store date values (in the format YYYY-MM-DD in most SQL databases).It doesn't have the NOT NULL , meaning it’s optional."}
                                 }
                             },
                             new Block
@@ -4195,7 +4185,26 @@ public class CourseHelper
                                     new Paragraph {
                                        BackgroundColor="#1C236D",
                                        FontColor="#FFF",
-                                       Body = "Columns like Description and DateAdded are optional because they allow NULL values. Here’s a fun perspective: a NULL value doesn’t mean \"zero\" or \"empty\" — it means \"unknown\" or \"not applicable,\" making databases a bit philosophical when it comes to missing information!\r\n\r\n\r\n\r\n\r\n\r\n\r\n" }
+                                       Body = "You have probably noticed that some words in our SQL statement are in upper-case. By convention, upper-case is used for SQL keywords, while lower case is used for custom words, such as names of properties and tables. It's also advisable to declare each property of a table in a new line. These approaches are optional, but help improving readability." }
+                                }
+                            },
+                            new Block
+                            {
+                                Title = "Constraints and Data Integrity",
+                                Paragraphs = new List<Paragraph>
+                                {
+                                      new Paragraph { Body = "In SQL, <b>constraints</b> are rules applied to the columns in a table to ensure that the data entered into the database adheres to certain conditions. These rules are crucial for maintaining <b>data integrity</b>, accuracy, and reliability within the database. Constraints help enforce the correctness of the data by ensuring that it follows predefined criteria before being saved." },
+                                      new Paragraph { Body = "As shown above, we’ve applied a few constraints to the table: <b>PRIMARY KEY</b> on ProductID: Ensures uniqueness and helps optimize queries that retrieve a product by its ID. <b>NOT NULL</b> on columns like ProductName, Price, and StockQuantity: Ensures that essential data is always provided for every product. No <b>NOT NULL</b> on Description and DateAdded: This allows for flexibility, enabling optional information while still keeping the table structured.\r\n" },
+                                }
+                            },
+                            new Block
+                            {
+                                Paragraphs = new List<Paragraph>
+                                {
+                                    new Paragraph {
+                                       BackgroundColor="#1C236D",
+                                       FontColor="#FFF",
+                                       Body = "Columns like Description and DateAdded are optional because they allow NULL values. Keep in mind that a NULL value doesn’t mean \"zero\" or \"empty\" — it means \"unknown\" or \"not applicable,\" making databases a bit philosophical when it comes to missing information!" }
                                 }
                             }
                         }
@@ -4215,7 +4224,7 @@ public class CourseHelper
                             {
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "In DB Browser Menu, click on the first item: New Database. Choose a location in your file system, a name and save. We're naming our file ecommerce, but you can choose any name you prefer. Navigate to the folder where you created the table and if everything worked correctly, you'll see your database file:" },
+                                    new Paragraph { Body = "In DB Browser Menu, click on the first item: <b>New Database</b>. Choose a location in your file system, a name and save. We're naming our file ecommerce, but you can choose any name you prefer. Navigate to the folder where you created the table and if everything worked correctly, you'll see your database file:" },
                                     new Paragraph {
                                         IsPicture = true,
                                         PictureUrl = "c4-ch5-sql-db-file.png"},
@@ -4226,7 +4235,7 @@ public class CourseHelper
                                 Title = "Applying Your First Script",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "Just below the Top Menu, you'll see a few tabs. In the Execute SQL tab, paste the script to create the table and click on the Play button, which executes the script:"},
+                                    new Paragraph { Body = "Just below the Top Menu, you'll see a few tabs. In the <b>Execute SQL</b> tab, paste the script to create the table and click on the <b>Play button</b>, which executes the script:"},
                                     new Paragraph {
                                         IsPicture = true,
                                         PictureUrl = "c4-ch5-sql-sqlite-practice-create.png"}
@@ -4237,7 +4246,7 @@ public class CourseHelper
                                 Title = "Examine the Table",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "Now choose the Database Structure tab. If everything worked correctly you'll see the tables properties:"},
+                                    new Paragraph { Body = "Now choose the <b>Database Structure</b> tab. If everything worked correctly you'll see the table's properties:"},
                                     new Paragraph {
                                         IsPicture = true,
                                         PictureUrl = "c4-ch5-sql-examine-table.png"}
@@ -4250,7 +4259,7 @@ public class CourseHelper
                                     new Paragraph {
                                        BackgroundColor="#1C236D",
                                        FontColor="#FFF",
-                                       Body = "SQLite tables can theoretically store up to 2^64 - 1 rows, which is about 18 quintillion rows. However, the practical limit is often much lower, depending on factors such as:\r\n\r\nDatabase file size: The total database size cannot exceed 140 terabytes (TB) for a single SQLite database file.\r\nMemory and disk space: While SQLite supports very large numbers of rows, the actual limit will be constrained by available system memory and storage.\r\nSQLite is designed to be lightweight, so while it can handle a massive number of rows, it is best used for smaller to medium-sized applications rather than as a large-scale enterprise database solution." }
+                                       Body = "SQLite tables can theoretically store up to 2^64 - 1 rows, which is about 18 quintillion rows. However, the practical limit is often much lower, depending on: 1. Database file size: The total database size cannot exceed 140 terabytes (TB) for a single SQLite database file. 2.Memory and disk space: While SQLite supports very large numbers of rows, the actual limit will be constrained by available system memory and storage.\r\nSQLite is designed to be lightweight, so while it can handle a massive number of rows, it is best used for smaller to medium-sized applications rather than as a large-scale enterprise database solution." }
                                 }
                             }
                         }
@@ -4270,33 +4279,45 @@ public class CourseHelper
                             {
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "In SQL, the INSERT statement is used to add new rows of data into a table. This is a fundamental operation when working with databases because it allows you to populate tables with data and create records. The INSERT statement can be written in different ways, depending on how much information you want to provide and whether or not you want to include columns that allow NULL values." },
-                                    new Paragraph { Body = "Here’s an example of inserting data into the `Products` table, which includes all columns" },
+                                    new Paragraph { Body = "In SQL, the <b>INSERT</b> statement is used to add new rows of data into a table. This is a fundamental operation when working with databases because it allows you to populate tables with data and create records. It can be written in different ways, depending on how much information you want to provide and whether or not you want to include columns that allow NULL values." },
+                                    new Paragraph { Body = "Here’s an example of inserting data into our Products table, which includes all columns." },
                                     new Paragraph {
                                         IsCode = true,
                                         Body = "INSERT INTO Products (ProductID, ProductName, Description, Price, StockQuantity, DateAdded)\r\nVALUES (NULL, 'Wireless Headphones', 'Noise-canceling over-ear headphones', 59.99, 100, '2024-11-24');\r\n"},
                                 }
                             },
-                            new Block
+                             new Block
                             {
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "**`INSERT INTO Products`**: This part specifies the table where we want to insert the data (`Products`)"},
-                                    new Paragraph { Body = "- **`(ProductID, ProductName, Description, Price, StockQuantity, DateAdded)`**: These are the columns that we are inserting values into. If we were to provide values for every column, we need to list them here in the same order as they are defined in the table.\r\n"},
-                                    new Paragraph { Body = "**`VALUES (NULL, 'Wireless Headphones', 'Noise-canceling over-ear headphones', 59.99, 100, '2024-11-24')`**: These are the actual values being inserted."},
-                                    new Paragraph { Body = "We use `NULL` for the `ProductID` column because this column is set to auto-increment. The database will automatically assign a unique ID value to it."},
-                                    new Paragraph { Body = "This method is ideal when you have data for all columns and don't mind providing values for the columns that allow `NULL` values"},
+                                    new Paragraph {
+                                       BackgroundColor="#1C236D",
+                                       FontColor="#FFF",
+                                       Body = "In DbBrowser, When executing commands that modify data, such as INSERT, <b>you need to save your changes or they won't persist</b>. You can do that by clicking on <b>File > Write Changes</b> in the left of the top menu." }
                                 }
                             },
                             new Block
                             {
+                                Title = "Inserting All Values",
+                                Paragraphs = new List<Paragraph>
+                                {
+                                    new Paragraph { Body = "<b>INSERT INTO Products</b>: This part specifies the table where we want to insert the data (Products)"},
+                                    new Paragraph { Body = "<b>ProductID, ProductName, Description, Price, StockQuantity, DateAdded</b>: These are the columns that we are inserting values into."},
+                                    new Paragraph { Body = "<b>VALUES (NULL, 'Wireless Headphones', 'Noise-canceling over-ear headphones', 59.99, 100, '2024-11-24')</b>: These are the actual values being inserted. They need to be in the same order as the columns declared in the previous part of the query."},
+                                    new Paragraph { Body = "<b>We use NULL for the ProductID column</b> because this column is set to auto-increment. The database will automatically assign a unique ID value to it."},
+                                    new Paragraph { Body = "This method is ideal when you have data for all columns and don't mind providing values for the columns that allow NULL values."},
+                                }
+                            },
+                            new Block
+                            {
+                                Title = "Inserting Partial Values",
                                 Paragraphs = new List<Paragraph>
                                 {
                                     new Paragraph { 
                                         IsCode = true,
                                         Body = "INSERT INTO Products (ProductName, Price, StockQuantity)\r\nVALUES ('Wireless Headphones', 59.99, 100);\r\n"},
                                     new Paragraph {
-                                        Body = "In cases where a column can accept `NULL` values, you don't need to explicitly include it in your `INSERT` statement. If you omit a column that allows `NULL`, the database will automatically insert a `NULL` value for that column (or the default value, if specified). This approach is useful when you only have data for some of the columns and the others are optional (i.e., can be `NULL` or have a default value)"}
+                                        Body = "In cases where a column can accept NULL values, <b>you don't need to explicitly include them</b> in your INSERT statement. If you omit a column that allows NULL, the database will automatically insert a NULL value for that column (or the default value, if specified). This approach is useful when you only have data for some of the columns and the others are optional."}
                                 }
                             },
                             new Block
@@ -4306,7 +4327,25 @@ public class CourseHelper
                                     new Paragraph {
                                        BackgroundColor="#1C236D",
                                        FontColor="#FFF",
-                                       Body = "SQLite tables can theoretically store up to 2^64 - 1 rows, which is about 18 quintillion rows. However, the practical limit is often much lower, depending on factors such as:\r\n\r\nDatabase file size: The total database size cannot exceed 140 terabytes (TB) for a single SQLite database file.\r\nMemory and disk space: While SQLite supports very large numbers of rows, the actual limit will be constrained by available system memory and storage.\r\nSQLite is designed to be lightweight, so while it can handle a massive number of rows, it is best used for smaller to medium-sized applications rather than as a large-scale enterprise database solution." }
+                                       Body = "INSERT is one of the most universally understood SQL commands across different database systems. Whether you’re using MySQL, PostgreSQL, SQL Server, or Oracle, the syntax is strikingly similar, making it easy to work across platforms." }
+                                }
+                            },
+                            new Block
+                            {
+                                Paragraphs = new List<Paragraph>
+                                {
+                                    new Paragraph {
+                                       Body = "Click on the button below to see a script to insert 100 products into our database. We'll be using this dataset for practice in the next lessons." }
+                                }
+                            },
+                            new Block
+                            {
+                                IsCourseCodePage = true,
+                                Paragraphs = new List<Paragraph>
+                                {
+                                    new Paragraph {
+                                       IsCode = true,
+                                       Body = "INSERT INTO Products (ProductName, Description, Price, StockQuantity, DateAdded) VALUES\r\n('Wireless Headphones', 'Noise-canceling over-ear headphones', 59.99, 100, '2024-01-05'),\r\n('Bluetooth Speaker', 'Compact and portable with powerful sound', 79.99, 50, '2024-02-10'),\r\n('Smart Watch', 'Tracks fitness and daily activities', 199.99, 30, '2024-03-15'),\r\n('Gaming Mouse', 'High precision and customizable buttons', 49.99, 200, '2024-04-01'),\r\n('4K Monitor', 'Ultra HD display with vibrant colors', 299.99, 25, '2024-05-20'),\r\n('Noise-Canceling Earbuds', 'Compact design with superior sound', 89.99, 120, '2024-06-11'),\r\n('Portable Charger', 'High-capacity power bank for on-the-go', 39.99, 300, '2024-07-04'),\r\n('Smartphone', 'Latest model with advanced features', 999.99, 15, '2024-08-18'),\r\n('Tablet', 'Lightweight and powerful for all tasks', 399.99, 20, '2024-09-30'),\r\n('Laptop', 'High-performance laptop for work and play', 1299.99, 10, '2024-10-12'),\r\n('Smart Thermostat', 'Energy-efficient home temperature control', 149.99, 40, '2024-01-22'),\r\n('VR Headset', 'Immersive virtual reality experience', 349.99, 18, '2024-02-18'),\r\n('Electric Scooter', 'Eco-friendly transportation solution', 799.99, 8, '2024-03-12'),\r\n('Action Camera', 'Capture adventures in stunning detail', 249.99, 70, '2024-04-25'),\r\n('Smart Doorbell', 'Secure and convenient home monitoring', 99.99, 50, '2024-05-14'),\r\n('Gaming Console', 'Next-gen gaming at its finest', 499.99, 12, '2024-06-22'),\r\n('Robot Vacuum', 'Effortless cleaning for any home', 299.99, 30, '2024-07-18'),\r\n('Fitness Tracker', 'Track your fitness goals daily', 59.99, 150, '2024-08-10'),\r\n('Wireless Keyboard', 'Ergonomic design and long battery life', 29.99, 200, '2024-09-05'),\r\n('External Hard Drive', 'Portable storage solution', 79.99, 80, '2024-10-27'),\r\n('Photography Drone', 'High-quality drone for photography', 599.99, 10, '2024-01-03'),\r\n('Smart Home Hub', 'Centralized control for smart devices', 129.99, 45, '2024-02-14'),\r\n('Streaming Device', 'Stream your favorite content on TV', 49.99, 90, '2024-03-01'),\r\n('Gaming Chair', 'Ergonomic chair for long gaming sessions', 199.99, 25, '2024-04-11'),\r\n('Graphic Tablet', 'Professional tablet for digital art', 349.99, 12, '2024-05-06'),\r\n('E-Reader', 'Lightweight e-reader with long battery life', 129.99, 60, '2024-06-15'),\r\n('Portable Projector', 'Mini projector for presentations', 249.99, 20, '2024-07-09'),\r\n('Mechanical Keyboard', 'Tactile and durable mechanical keyboard', 79.99, 110, '2024-08-03'),\r\n('Noise Meter', 'Handheld device for measuring noise levels', 39.99, 50, '2024-09-18'),\r\n('Smart Light Bulbs', 'Customizable smart lighting', 59.99, 100, '2024-10-02'),\r\n('Power Drill', 'Cordless power drill with accessories', 99.99, 80, '2024-01-25'),\r\n('Cookware Set', 'Non-stick cookware set for your kitchen', 149.99, 35, '2024-02-05'),\r\n('Espresso Machine', 'Professional-grade coffee maker', 399.99, 10, '2024-03-16'),\r\n('Digital Thermometer', 'Accurate readings for home use', 19.99, 150, '2024-04-30'),\r\n('Stand Mixer', 'Powerful stand mixer for baking', 249.99, 15, '2024-05-20'),\r\n('Gaming Laptop', 'High-performance gaming laptop', 1499.99, 8, '2024-06-11'),\r\n('Smart Air Purifier', 'Improve indoor air quality', 299.99, 25, '2024-07-04'),\r\n('Smart Lock', 'Keyless entry smart lock', 199.99, 50, '2024-08-01'),\r\n('Wireless Router', 'Fast and secure internet connectivity', 79.99, 100, '2024-09-14'),\r\n('Electric Kettle', 'Stylish and efficient kettle', 39.99, 150, '2024-10-18'),\r\n('Bluetooth Headset', 'Lightweight and reliable headset', 49.99, 200, '2024-01-10'),\r\n('Dash Cam', 'High-resolution dash camera', 99.99, 75, '2024-02-25'),\r\n('Smart Pen', 'Digitize your handwritten notes', 129.99, 30, '2024-03-05'),\r\n('Portable Fridge', 'Compact fridge for outdoor use', 299.99, 10, '2024-04-20'),\r\n('Wi-Fi Extender', 'Expand your home Wi-Fi coverage', 49.99, 120, '2024-05-25'),\r\n('Digital Camera', 'Capture high-quality images and videos', 799.99, 15, '2024-06-30'),\r\n('Electric Toothbrush', 'Improve oral health with advanced features', 99.99, 90, '2024-07-15'),\r\n('Waterproof Speaker', 'Durable speaker for outdoor use', 129.99, 50, '2024-08-25'),\r\n('Air Fryer', 'Healthy cooking with less oil', 179.99, 30, '2024-09-06'),\r\n('Smart Scale', 'Track your weight and health metrics', 59.99, 100, '2024-10-20'),\r\n('Handheld Vacuum', 'Compact vacuum for quick cleanups', 89.99, 40, '2024-11-01'),\r\n('Cordless Hair Clippers', 'Professional grooming kit', 49.99, 70, '2024-11-12'),\r\n('Wireless Door Sensor', 'Monitor door activity in real-time', 19.99, 150, '2024-11-23'),\r\n('Smart Ceiling Fan', 'Energy-efficient fan with remote control', 149.99, 20, '2024-12-05'),\r\n('Portable Air Conditioner', 'Cooling solution for small rooms', 299.99, 15, '2024-12-16'),\r\n('Rechargeable Flashlight', 'Bright and durable flashlight', 39.99, 200, '2024-12-27'),\r\n('Digital Alarm Clock', 'Modern design with multiple features', 29.99, 100, '2024-11-08'),\r\n('Electric Blanket', 'Stay warm with adjustable heat levels', 69.99, 50, '2024-11-19'),\r\n('Smart Garden System', 'Automated plant care for home', 199.99, 10, '2024-12-01'),\r\n('Home Security Camera', 'Monitor your property with ease', 99.99, 80, '2024-12-12'),\r\n('Smart Outlet', 'Control appliances from your phone', 24.99, 120, '2024-12-23'),\r\n('Wireless Charger', 'Fast charging for compatible devices', 29.99, 150, '2024-11-02'),\r\n('Electric Griddle', 'Perfect for pancakes and more', 59.99, 40, '2024-11-13'),\r\n('Smart Bike Lock', 'Secure your bike with smartphone access', 99.99, 30, '2024-11-24'),\r\n('Automatic Soap Dispenser', 'Hygienic and touch-free', 29.99, 100, '2024-12-06'),\r\n('Home Theater System', 'Premium surround sound experience', 799.99, 10, '2024-12-17'),\r\n('Robot Lawn Mower', 'Effortless lawn maintenance', 899.99, 8, '2024-12-28'),\r\n('Electric Skillet', 'Multi-functional electric skillet', 49.99, 60, '2024-11-09'),\r\n('Cordless Screwdriver', 'Handy tool for small projects', 29.99, 200, '2024-11-20'),\r\n('Thermal Camera', 'Infrared imaging for professionals', 399.99, 5, '2024-12-02'),\r\n('Electric Wine Opener', 'Open bottles with ease', 39.99, 100, '2024-12-13'),\r\n('Portable Blender', 'Smoothies on the go', 49.99, 80, '2024-12-24'),\r\n('Desktop Air Purifier', 'Keep your workspace fresh', 99.99, 25, '2024-11-03'),\r\n('Solar Power Bank', 'Eco-friendly portable charger', 59.99, 150, '2024-11-14'),\r\n('Digital Picture Frame', 'Display cherished memories', 129.99, 50, '2024-11-25'),\r\n('Instant Camera', 'Capture memories with instant prints', 79.99, 40, '2024-12-07'),\r\n('Portable Heater', 'Stay warm anywhere', 69.99, 30, '2024-12-18'),\r\n('Electric Pressure Cooker', 'Quick and healthy meals', 99.99, 20, '2024-12-29'),\r\n('Cordless Hand Mixer', 'Mix ingredients effortlessly', 39.99, 100, '2024-11-04'),\r\n('Motion Sensor Light', 'Automatic lighting for your home', 19.99, 200, '2024-11-15'),\r\n('Electric Standing Desk', 'Improve posture and productivity', 399.99, 10, '2024-11-26'),\r\n('Smart Coffee Mug', 'Keep beverages at the perfect temperature', 49.99, 80, '2024-12-08'),\r\n('Home Gym Set', 'Compact and versatile workout equipment', 299.99, 15, '2024-12-19'),\r\n('Water Filtration System', 'Clean and safe drinking water', 99.99, 25, '2024-12-30'),\r\n('Electric Bike', 'Eco-friendly transportation', 1199.99, 5, '2024-11-05'),\r\n('Wireless Mouse', 'Reliable and ergonomic', 19.99, 200, '2024-11-16'),\r\n('Adjustable Dumbbells', 'Space-saving fitness solution', 199.99, 20, '2024-11-27'),\r\n('Neck Massager', 'Relieve tension and stress', 59.99, 100, '2024-12-09'),\r\n('Smartphone Gimbal', 'Smooth and steady video recording', 99.99, 50, '2024-12-20'),\r\n('Electric Water Kettle', 'Fast boiling with modern design', 29.99, 150, '2024-12-31'),\r\n('Smart Mirror', 'Interactive mirror with built-in assistant', 299.99, 10, '2024-11-06'),\r\n('Pet Tracker', 'GPS tracking for your furry friends', 49.99, 100, '2024-11-17'),\r\n('Smart Toothbrush', 'Improve dental health with smart features', 99.99, 60, '2024-11-28'),\r\n('Mini Dehumidifier', 'Combat humidity in small spaces', 49.99, 50, '2024-12-10'),\r\n('Electric Hand Warmer', 'Stay warm during cold days', 19.99, 200, '2024-12-21'),\r\n('Smart Water Bottle', 'Track your hydration habits', 39.99, 150, '2024-12-22'),\r\n('Portable Speaker', 'Enjoy music anywhere', 79.99, 70, '2024-12-11'),\r\n('Smart Thermostat', 'Automated home temperature control', 129.99, 40, '2024-12-25'),\r\n('Electric Skateboard', 'Eco-friendly transportation alternative', 499.99, 10, '2024-12-26'),\r\n('Wireless Gaming Headset', 'Immersive sound for gaming', 79.99, 50, '2024-12-27');\r\n\r\n\r\n" }
                                 }
                             }
                         }
@@ -4326,8 +4365,7 @@ public class CourseHelper
                             {
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "The `SELECT` statement is one of the most fundamental and frequently used operations in SQL. It allows you to retrieve data from a table, enabling you to query and view the information stored within your database. Understanding how to use the `SELECT` statement effectively is crucial for working with SQL" },
-                                    new Paragraph { Body = "The `SELECT` statement is used to query a database and retrieve data from one or more tables. It can be customized to fetch specific columns, apply filters, sort results, and even perform complex operations like joins, aggregations, and grouping. The flexibility of the `SELECT` statement makes it a powerful tool for interacting with your data" },
+                                    new Paragraph { Body = "The <b>SELECT</b> statement is one of the most fundamental and frequently used operations in SQL. It allows you to retrieve data from a table, enabling you to query and view the information stored within your database. It can be customized to fetch specific columns, apply filters, sort results, and even perform complex operations like joins, aggregations, and grouping. Its flexibility makes it a powerful tool for interacting with your data." },
                                 }
                             },
                             new Block
@@ -4335,10 +4373,14 @@ public class CourseHelper
                                 Title = "Basic Select statement",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "The most basic form of a `SELECT` query retrieves all columns from a table. Here’s the basic syntax:"},
+                                    new Paragraph { Body = "The most basic form of a SELECT query <b>retrieves all columns from a table</b>. In DB Browser, run the following command in the <b>Execute SQL</b> tab. This query will return all 100 records added in the previous chapter."},
                                     new Paragraph {
                                         IsCode = true,
-                                        Body = "SELECT * FROM Products"}
+                                        Body = "SELECT * FROM Products"},
+                                    new Paragraph { Body = "See the outcome below. Notice there's a pane under the queried data with information about the execution of the query."},
+                                    new Paragraph {
+                                        IsPicture = true,
+                                        PictureUrl = "c4-ch7-sql-query-result.png"}
                                 }
                             },
                             new Block
@@ -4346,10 +4388,14 @@ public class CourseHelper
                                 Title = "Selecting Specific columns",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "Rather than retrieving every column with `*`, you can specify which columns you want to see by naming them. This is useful when you need only specific data from the table."},
+                                    new Paragraph { Body = "Rather than retrieving every column with `*`, <b>you can specify which columns you want</b> to see by naming them. This is useful when you need only specific data from the table."},
                                     new Paragraph {
                                         IsCode = true,
-                                        Body = "SELECT * FROM Products"}
+                                        Body = "SELECT ProductName, Price FROM products"},
+                                     new Paragraph { Body = "Notice only the requested columns are showing."},
+                                    new Paragraph {
+                                        IsPicture = true,
+                                        PictureUrl = "c4-ch7-sql-query-result-2.png"}
                                 }
                             }
                         }
@@ -4371,11 +4417,11 @@ public class CourseHelper
                                 Title = "Filtering Data with WHERE",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "One of the most powerful features of the `SELECT` statement is the `WHERE` clause. This allows you to filter the data returned based on certain conditions. The `WHERE` clause can be used to retrieve only the rows that meet specific criteria."},
+                                    new Paragraph { Body = "One of the most powerful features of the <b>SELECT</b> statement is the <b>WHERE</b> clause. This allows you to filter the data returned based on certain conditions. It can be used to retrieve only the rows that meet specific criteria."},
                                     new Paragraph {
                                         IsCode = true,
                                         Body = "SELECT ProductName, Price FROM Products\r\nWHERE StockQuantity > 100;"},
-                                    new Paragraph { Body = "WHERE StockQuantity > 100`**: This condition filters the rows, returning only those where the `StockQuantity` is greater than 100. You can use various operators in the `WHERE` clause, such as `=`, `>`, `<`, `BETWEEN`, `IN`, `LIKE`, and more."},
+                                    new Paragraph { Body = "Running the query above using our dataset <b>should return 21 products</b>. The <b>WHERE StockQuantity > 100</b> condition filters the rows, returning only those where the <b>StockQuantity is greater than 100</b>. You can use various operators in the WHERE clause, such as =, >, <, BETWEEN, IN, LIKE, and more."},
                                 }
                             },
                             new Block
@@ -4383,11 +4429,11 @@ public class CourseHelper
                                 Title = "Sorting Results with ORDER BY",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "You can sort the results of a `SELECT` query using the `ORDER BY` clause. By default, SQL sorts results in ascending order (`ASC`), but you can also sort in descending order (`DESC`)."},
+                                    new Paragraph { Body = "You can sort the results of a`SELECT query using the <b>ORDER BY</b> clause. By default, SQL sorts results in ascending order (<b>ASC</b>), but you can also sort in descending order (<b>DESC</b>)."},
                                     new Paragraph {
                                         IsCode = true,
-                                        Body = "SELECT ProductName, Price, StockQuantity FROM Products\r\nWHERE StockQuantity > 100ORDER BY Price DESC;"},
-                                    new Paragraph { Body = "ORDER BY Price DESC`**: This sorts the results by the `Price` column in descending order, meaning the highest prices will appear first. You can also sort in ascending order by using `ASC` (which is the default if no sorting direction is specified)"},
+                                        Body = "SELECT ProductName, Price, StockQuantity FROM Products\r\nWHERE StockQuantity > 100 \r\nORDER BY Price DESC;"},
+                                    new Paragraph { Body = "Run the query above and see if the highest prices will appear first. Also try removing the DESC keyword. In this case the order will be by price ascending, by default."},
                                 }
                             },
                             new Block
@@ -4395,11 +4441,10 @@ public class CourseHelper
                                 Title = "Limiting the Number of Results",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "Limiting the Number of Results"},
                                     new Paragraph {
                                         IsCode = true,
-                                        Body = "SELECT ProductName, Price FROM Products\r\nWHERE StockQuantity > 100ORDER BY Price DESC\r\nLIMIT 5;"},
-                                    new Paragraph { Body = "This limits the number of rows returned to 5. You can adjust this number to suit your needs. This query will return the top 5 products (based on `Price`) with more than 100 units in stock"},
+                                        Body = "SELECT ProductName, Price FROM Products\r\nWHERE StockQuantity > 100\r\nORDER BY Price DESC\r\nLIMIT 5;"},
+                                    new Paragraph { Body = "This limits the number of rows returned to 5. You can adjust this number to suit your needs. This query will return the <b>top 5 products</b> (based on Price) with more than 100 units in stock"},
                                 }
                             },
                             new Block
@@ -4430,7 +4475,7 @@ public class CourseHelper
                             {
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "The `SELECT` statement is the cornerstone of SQL querying. By understanding the various ways you can use `SELECT`—such as selecting specific columns, filtering data, sorting results, and using distinct values—you can retrieve the exact data you need from your database. With these fundamental skills, you’ll be able to craft more complex queries and analyze your data more effectively. As you continue to work with SQL, you’ll learn even more advanced techniques like joins, aggregations, and subqueries that will further enhance your querying capabilities"}
+                                    new Paragraph { Body = "By understanding the various ways you can use <b>SELECT</b> — such as selecting specific columns, filtering data, sorting results, and using distinct values — you can retrieve the exact data you need from your database. With these fundamental skills, you’ll be able to craft more complex queries and analyze your data more effectively."}
                                 }
                             },
                         }
