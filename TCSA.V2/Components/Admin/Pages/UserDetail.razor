@@ -87,13 +87,11 @@
                                 }
                             </td>
                         </tr>
-
                         <tr>
                             <th>Belt</th>
                             <td>@((Level)User.Level)</td>
                         </tr>
-
-                          <tr>
+                        <tr>
                             <th>Belt Should Be</th>
                             <td>@(BeltShouldBe)</td>
                         </tr>
@@ -104,7 +102,13 @@
 
         <div class="row user-detail-row">
             <div class="col">
-                <button type="button" class="btn btn-primary" @onclick="ResetUser">ResetUser</button>
+                <button type="button" class="btn btn-primary" @onclick="ResetUser">Reset User</button>
+            </div>
+        </div>
+
+        <div class="row user-detail-row">
+            <div class="col">
+                <button type="button" class="btn btn-primary" @onclick="ExportData">Export Data</button>
             </div>
         </div>
 
@@ -434,6 +438,12 @@
     private async Task ResetUser()
     {
         await AdminService.ResetUserData(UserId);
+        User = await UserService.GetUserById(UserId);
+    }
+
+    private async Task ExportData()
+    {
+        await AdminService.ExportData(UserId, "");
         User = await UserService.GetUserById(UserId);
     }
 }

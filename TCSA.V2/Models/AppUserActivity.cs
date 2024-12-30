@@ -1,10 +1,13 @@
-﻿namespace TCSA.V2.Models;
+﻿using TCSA.V2.Data;
+
+namespace TCSA.V2.Models;
 
 public class AppUserActivity
 {
     public int Id { get; set; }
     public int ProjectId { get; set; }
     public DashboardProject DashboardProject { get; set; }
+    public ApplicationUser ApplicationUser { get; set; }
     public int ChallengeId { get; set; }
     public string AppUserId { get; set; }
     public DateTimeOffset DateSubmitted { get; set; }

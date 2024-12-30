@@ -15,6 +15,7 @@ public interface IAdminService
     Task RequestChanges(int id);
     Task DeleteFromDashboard(int id);
     Task ArchiveProject(int id);
+    Task ExportData(string fromUser, string toUser);
 }
 
 public class AdminService : IAdminService
@@ -24,6 +25,74 @@ public class AdminService : IAdminService
     public AdminService(IDbContextFactory<ApplicationDbContext> factory)
     {
         _factory = factory;
+    }
+
+    public async Task ExportData(string fromUser, string toUser)
+    {
+        using (var context = _factory.CreateDbContext())
+        {
+            var userFrom = context.Users
+                .Include(x => x.DashboardProjects)
+                .Include(x => x.UserActivity)
+                .FirstOrDefault(x => x.Id == "06241f90-ff7d-490f-8dc2-02ab5911b7d3");
+
+            var userTo = context.Users
+                .Include(x => x.DashboardProjects)
+                .Include(x => x.UserActivity)
+                .FirstOrDefault(x => x.Id == "9b70b558-5703-4cfe-982b-7b0f5d890fb4");
+
+            var projects = new List<DashboardProject>();
+            var activities = new List<AppUserActivity>();
+
+            foreach (var project in userFrom.DashboardProjects)
+            {
+                projects.Add(new DashboardProject
+                {
+                    ProjectId = project.ProjectId,
+                    DateCompleted = project.DateCompleted,
+                    GithubUrl = project.GithubUrl,
+                    IsPendingNotification = project.IsPendingNotification,
+                    IsArchived = project.IsArchived,
+                    IsPendingReview = project.IsPendingReview,
+                    DateSubmitted = project.DateSubmitted
+                });
+            }
+
+            foreach (var activity in userFrom.UserActivity)
+            {
+                activities.Add(new AppUserActivity
+                {
+                    ProjectId = activity.ProjectId,
+                    ActivityType = activity.ActivityType,
+                    DateSubmitted = activity.DateSubmitted,
+                    ChallengeId = activity.ChallengeId,
+                });
+            };
+
+            context.Entry(userTo).State = EntityState.Detached;
+
+            using (var newContext = _factory.CreateDbContext())
+            {
+                var newUserTo = newContext.Users
+                    .Include(x => x.DashboardProjects)
+                    .Include(x => x.UserActivity)
+                    .FirstOrDefault(x => x.Id == "9b70b558-5703-4cfe-982b-7b0f5d890fb4");
+
+                if (newUserTo == null)
+                {
+                    throw new InvalidOperationException("User not found in the new context.");
+                }
+
+                newUserTo.DashboardProjects.AddRange(projects);
+                newUserTo.UserActivity.AddRange(activities);
+
+                await newContext.SaveChangesAsync();
+            }
+
+            await context.SaveChangesAsync();
+
+            Console.WriteLine("Stop here");
+        }
     }
 
     public async Task DeleteFromDashboard(int id)

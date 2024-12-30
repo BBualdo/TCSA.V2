@@ -28,6 +28,11 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         .HasForeignKey(aua => aua.ProjectId)      // Map the foreign key
         .HasPrincipalKey(dp => dp.ProjectId);
 
+        modelBuilder.Entity<AppUserActivity>()
+            .HasOne(aua => aua.ApplicationUser)       // Specify the navigation property
+            .WithMany(u => u.UserActivity)                               // Specify the relationship (e.g., one-to-many or one-to-one)
+            .HasForeignKey(aua => aua.AppUserId);   // Map the foreign key
+
         modelBuilder.Entity<UserReview>()
             .HasOne(ur => ur.User)
             .WithMany(u => u.CodeReviewProjects)

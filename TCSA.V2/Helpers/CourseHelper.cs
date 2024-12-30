@@ -4444,7 +4444,7 @@ public class CourseHelper
                                     new Paragraph {
                                         IsCode = true,
                                         Body = "SELECT ProductName, Price FROM Products\r\nWHERE StockQuantity > 100\r\nORDER BY Price DESC\r\nLIMIT 5;"},
-                                    new Paragraph { Body = "This limits the number of rows returned to 5. You can adjust this number to suit your needs. This query will return the <b>top 5 products</b> (based on Price) with more than 100 units in stock"},
+                                    new Paragraph { Body = "This limits the number of rows returned to 5. You can adjust this number to suit your needs. This query will return the <b>top 5 products</b> (based on Price) with more than 100 units in stock."},
                                 }
                             },
                             new Block
@@ -4452,11 +4452,12 @@ public class CourseHelper
                                 Title = "Eliminate Duplicates",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "The `DISTINCT` keyword is used to eliminate duplicate rows from the result set. It is useful when you want to retrieve only unique values for a specific column or combination of columns."},
+                                    new Paragraph { Body = "The <b>DISTINCT</b> keyword is used to eliminate duplicate rows from the result set. It is useful when you want to retrieve only unique values for a specific column or combination of columns."},
                                     new Paragraph {
                                         IsCode = true,
-                                        Body = "SELECT DISTINCT StockQuantity FROM Products;"},
-                                    new Paragraph { Body = "**`DISTINCT`**: This keyword ensures that only unique values are returned. If multiple rows have the same `StockQuantity`, only one of them will be included in the result set. This query will return a list of distinct `StockQuantity` values from the `Products` table."},
+                                        Body = "SELECT DISTINCT StockQuantity FROM Products;"
+                                    },
+                                    new Paragraph { Body = "Using our data set, this query will return a list of 24 distinct StockQuantity values from the Products table."},
                                 }
                             },
                             new Block
@@ -4464,18 +4465,19 @@ public class CourseHelper
                                 Title = "Combining Multiple Conditions",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "You can combine multiple conditions in the `WHERE` clause using logical operators like `AND` and `OR`. This allows you to create more complex filters."},
+                                    new Paragraph { Body = "<b>You can combine multiple conditions</b> in the WHERE clause using logical operators like AND and OR. This allows you to create more complex filters."},
                                     new Paragraph {
                                         IsCode = true,
                                         Body = "SELECT ProductName, Price, StockQuantity FROM Products\r\nWHERE StockQuantity > 100 AND Price < 50;"},
-                                    new Paragraph { Body = "This logical operator ensures that both conditions must be true for a row to be included in the result. In this case, the `StockQuantity` must be greater than 100 **and** the `Price` must be less than 50. This query will return the `ProductName`, `Price`, and `StockQuantity` of products that meet both conditions"},
+                                    new Paragraph { Body = "This logical operator ensures that both conditions must be true for a row to be included in the result. In this case, the `StockQuantity` must be greater than 100 <b>and</b> the `Price` must be less than 50. This query will return the `ProductName`, `Price`, and `StockQuantity` of 17 products that meet both conditions in our dataset. "},
                                 }
                             },
                             new Block
                             {
+                                Title = "Exercises",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "By understanding the various ways you can use <b>SELECT</b> — such as selecting specific columns, filtering data, sorting results, and using distinct values — you can retrieve the exact data you need from your database. With these fundamental skills, you’ll be able to craft more complex queries and analyze your data more effectively."}
+                                    new Paragraph { Body = "<ol>\r\n  <li>✔️ Write a query to find all products with a <b>Price</b> greater than 20.</li>\r\n  <li>✔️ Write a query to retrieve products that have a <b>StockQuantity</b> between 50 and 200.</li>\r\n  <li>✔️ Write a query to list all distinct <b>StockQuantity</b> values in the <b>Products</b> table.</li>\r\n  <li>✔️ Write a query to find the top 3 most expensive products using <b>ORDER BY</b> and <b>LIMIT</b>.</li>\r\n  <li>✔️ Write a query to retrieve all products with a <b>Price</b> less than 30 or a <b>StockQuantity</b> greater than 300.</li>\r\n  <li>✔️ Write a query to find all products added to the database after the the 30th of March, 2024, using the <b>DateAdded</b> column.</li>\r\n  <li>✔️ Write a query to count the number of products with <b>StockQuantity</b> equal to 100 and a <b>Price</b> greater than 50.</li>\r\n  <li>✔️ Write a query to list all products with <b>StockQuantity</b> greater than 200 and <b>Price</b> between 20 and 80, sorted by <b>Price</b> in ascending order.</li>\r\n  <li>✔️ Write a query to find all products with <b>StockQuantity</b> less than 150 or a <b>Price</b> greater than 500, and that were added to the database before the the 30th of September, 2024.</li>\r\n  <li>✔️ Combine the use of <b>WHERE</b>, <b>ORDER BY</b>, and <b>LIMIT</b> to find the top 5 cheapest products that have more than 50 units in stock, were added to the database after the the 1st of June, 2024, and have a <b>Price</b> less than 100.</li>\r\n</ol>\r\n"}
                                 }
                             },
                         }
@@ -4496,44 +4498,44 @@ public class CourseHelper
                             {
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "Aggregate functions in SQL are essential tools for analyzing and summarizing data. These functions perform calculations on a set of values and return a single result. Aggregate functions are commonly used in combination with the `GROUP BY` clause but can also work independently. This chapter will introduce key aggregate functions, explain their use cases, and provide examples to help you understand how to use them effectively."},
+                                    new Paragraph { Body = "Aggregate functions in SQL are essential tools for analyzing and summarizing data. These functions perform calculations on a set of values and return a single result. They are commonly used in combination with the <b>GROUP BY</b> clause but can also work independently. This chapter will introduce key aggregate functions, explain their use cases, and provide examples to help you understand how to use them effectively."},
                                     new Paragraph { Body = "Aggregate functions operate on multiple rows of data and return a single value that summarizes the data in some way. Examples include calculating sums, averages, counts, and finding the maximum or minimum values in a column."},
                                 }
                             },
                             new Block
                             {
-                                Title = "Counting Rows with `COUNT`",
+                                Title = "Counting Rows with COUNT",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "The COUNT function is used to count the number of rows or non-null values in a column."},
+                                    new Paragraph { Body = "The <b>COUNT</b> function is used to count the number of rows or non-null values in a column."},
                                     new Paragraph {
                                         IsCode = true,
                                         Body = "SELECT COUNT(*) AS TotalProducts\r\nFROM Products;"},
-                                    new Paragraph { Body = "Output?"},
+                                    new Paragraph { Body = "The output for the above query should be a single row with a single Total Products column with the value of 100. Notice we're using an Alias for the first time, using the keyword <b>AS</b> to define a custom name for the column."},
                                 }
                             },
                             new Block
                             {
-                                Title = "Summing Values with `SUM`",
+                                Title = "Summing Values with SUM",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "The `SUM` function adds up all the values in a numeric column."},
+                                    new Paragraph { Body = "The <b>SUM</b> function adds up all the values in a numeric column."},
                                     new Paragraph {
                                         IsCode = true,
-                                        Body = "SELECT SUM(Price * Quantity) AS TotalRevenue\r\nFROM Orders\r\nJOIN Products ON Orders.ProductID = Products.ProductID;"},
-                                    new Paragraph { Body = "Result"},
+                                        Body = "SELECT SUM(Price * Quantity) AS TotalCatalogValue\r\nFROM Products\r\n"},
+                                    new Paragraph { Body = "The result of this query should be the sum of all products multiplied by their prices. In our data set, this value would be 578079.59."},
                                 }
                             },
                             new Block
                             {
-                                Title = "Finding Averages with `AVG`",
+                                Title = "Finding Averages with AVG",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "The `AVG` function calculates the average value of a numeric column."},
+                                    new Paragraph { Body = "The <b>AVG</b> function calculates the average value of a numeric column."},
                                     new Paragraph {
                                         IsCode = true,
                                         Body = "SELECT AVG(Price) AS AveragePrice\r\nFROM Products;\r\n"},
-                                    new Paragraph { Body = "Result"},
+                                    new Paragraph { Body = "The average product price in our catalogue should be 209.44"},
                                 }
                             },
                             new Block
@@ -4541,11 +4543,11 @@ public class CourseHelper
                                 Title = "Finding Minimum and Maximum Values",
                                 Paragraphs = new List<Paragraph>
                                 {
-                                    new Paragraph { Body = "The `MIN` and `MAX` functions identify the smallest and largest values in a column, respectively."},
+                                    new Paragraph { Body = "The <b>MIN</b> and <b>MAX</b> functions identify the smallest and largest values in a column, respectively."},
                                     new Paragraph {
                                         IsCode = true,
                                         Body = "SELECT MIN(Price) AS CheapestProduct, MAX(Price) AS MostExpensiveProduct\r\nFROM Products;"},
-                                    new Paragraph { Body = "Result"},
+                                    new Paragraph { Body = "The result should be two custom columns with the values of 19.99 and 1499.99"},
                                 }
                             },
                             new Block
@@ -4557,7 +4559,6 @@ public class CourseHelper
                                     new Paragraph {
                                         IsCode = true,
                                         Body = "SELECT COUNT(*) AS TotalProducts,\r\n       SUM(Price) AS TotalPrice,\r\n       AVG(Price) AS AveragePrice,\r\n       MIN(Price) AS CheapestProduct,\r\n       MAX(Price) AS MostExpensiveProduct\r\nFROM Products;\r\n"},
-                                    new Paragraph { Body = "Result"},
                                 }
                             },
                             new Block
@@ -4569,7 +4570,16 @@ public class CourseHelper
                                        FontColor="#FFF",
                                        Body = "Unlike SUM or AVG, which require adding up or dividing numbers, MIN and MAX just scan for the smallest or largest value. They're the speediest of aggregate functions and are great for quick stats." }
                                 }
-                            }
+                            },
+                            new Block
+                            {
+                                Title = "Exercises",
+                                Paragraphs = new List<Paragraph>
+                                {
+                                    new Paragraph {
+                                        Body = "<ol>\r\n  <li>✔️ Write a query to count the total number of rows in the <b>Products</b> table where the <b>StockQuantity</b> is greater than 50.</li>\r\n  <li>✔️ Write a query to find the total value of the 5  most expensive products by summing the <b>Price</b> multiplied by <b>StockQuantity</b>.</li>\r\n  <li>✔️ Write a query to calculate the average <b>Price</b> of all products added in the last 6 months.</li>\r\n  <li>✔️ Write a query to retrieve the minimum and maximum <b>Date</b> of all products, displaying them in custom columns named <b>EarliestProduct</b> and <b>LatestProduct</b>.</li>\r\n  <li>✔️ Write a query to count how many products have a <b>Price</b> greater than 200.</li>\r\n  <li>✔️ Write a query to find the total value of all products added to the catalog after the 1st of July, 2024, by summing the <b>Price</b> multiplied by <b>StockQuantity</b>.</li>\r\n  <li>✔️ Write a query to calculate the average <b>Price</b> of products with a <b>StockQuantity</b> greater than 100 and less than 300.</li>\r\n  <li>✔️ Write a query to find the total number of products and their total catalog value for products added to the catalog before the 1st of November, 2024.</li>\r\n  <li>✔️ Write a query to retrieve the minimum and maximum <b>Price</b>, the average <b>Price</b>, and the total number of products for the 10 cheapest products.</li>\r\n  <li>✔️ Write a query to calculate the total number of products, total catalog value, average price, and the minimum and maximum prices for products with a <b>Price</b> greater than 100, a <b>StockQuantity</b> less than 500, and added after the 1st of October, 2024.</li>\r\n</ol>\r\n" }
+                                }
+                            },
                         }
                     },
                     new Article
