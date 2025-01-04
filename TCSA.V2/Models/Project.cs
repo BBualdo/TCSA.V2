@@ -33,3 +33,9 @@ public enum Difficulty
     Advanced
 }
 
+public class MockProject
+{
+    public string Title { get; set; }
+    public string Description { get; set; } // Details shown on hover
+    public bool IsCompleted { get; set; }
+}

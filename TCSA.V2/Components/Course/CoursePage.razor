@@ -1,8 +1,35 @@
-﻿@using TCSA.V2.Models
+﻿@using System.Security.Claims
+
+@using TCSA.V2.Components.UI
+@using TCSA.V2.Models
+@using TCSA.V2.Services
+@using static TCSA.V2.Helpers.Enums
 @inject IJSRuntime JSRuntime
 
-<div class="container mt-5 pt-5">
-    @foreach (var block in Article.Blocks)
+<div class="container card card-course-content mt-5 pt-5">
+    <div class="row justify-content-center mb-3">
+        <div class="col text-center">
+            <p class="advertisement">Advertisement</p>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4831088216810061"
+                    crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-format="fluid"
+                 data-ad-client="ca-pub-4831088216810061"
+                 data-ad-slot="2503487443"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+    @if (IsCompleted)
+    {
+        <Alert AlertType="AlertType.Success">
+            <p>You have completed this chapter</p>
+        </Alert>
+    }
+    @foreach (var block in BlocksToShow)
     {
         if (!string.IsNullOrEmpty(@block.Title))
         {
@@ -14,7 +41,7 @@
             <div class="mt-3">
                 @if (paragraph.IsCode)
                 {
-                    <pre><code class="language-csharp">@((MarkupString)paragraph.Body)</code></pre>
+                    <pre class="line-numbers"><code class="language-csharp">@((MarkupString)paragraph.Body)</code></pre>
                 }
                 else if (paragraph.IsPicture)
                 {
@@ -24,19 +51,101 @@
                 }
                 else
                 {
-                    <p class="mt-2">@((MarkupString)paragraph.Body)</p>
+                    @if (!string.IsNullOrWhiteSpace(paragraph.BackgroundColor))
+                    {
+                        <div style="background-color:@paragraph.BackgroundColor; padding: 1rem;">
+                            <p style="color:@paragraph.FontColor;">@((MarkupString)paragraph.Body)</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="mt-2">@((MarkupString)paragraph.Body)</p>
+                    }
                 }
             </div>
         }
     }
+
+    <div class="row">
+        @if (IsLoggedIn)
+        {
+            <div class="mt-3 mb-3 d-flex align-items-center">
+                <p>This chapter is worth <b> @Article.ExperiencePoints</b></p>
+                <img src="img/experience.png" width="25" class="img-xp-header ms-1 pb-1" alt="..." />
+            </div>
+        }
+        @if (!IsCode && Article.Blocks.Any(x => x.IsCourseCodePage))
+        {
+            <div class="col">
+                <button class="btn btn-outline-primary btn-academy mt-5" type="button" @onclick="() => NavigateToArticle(
+            Article.CourseDisplayId.Value, Article.Id, true)" disabled="@IsLoading">
+                    View Source Code
+                </button>
+            </div>
+        }
+    </div>
+
+    @if (IsLoggedIn)
+    {
+        @if (!IsCompleted)
+        {
+            <div class="user-buttons mt-2">
+                @if (IsLoading)
+                {
+                    <LoadingSpinner />
+                }
+                else
+                {
+                    <button class="btn btn-success" type="button" @onclick="MarkAsRead" disabled="@IsLoading">Mark As Completed</button>
+                }
+            </div>
+            <br />
+        }
+    }
+    else
+    {
+        <div class="mt-3 mb-3">
+            <Alert AlertType="AlertType.TCSA">
+                <p>Log in to mark this chapter as read and save your progress.</p>
+            </Alert>
+        </div>
+    }
 </div>
 
 @code {
-    [Parameter] public Article Article { get; set; }
+    [Inject] private AuthenticationStateProvider AuthenticationState { get; set; }
+    [Inject] private IProjectService ProjectService { get; set; }
+    [Inject] private IUserService UserService { get; set; }
+    [Inject] private IUserActivityService ActivityService { get; set; }
+    [Inject] NavigationManager NavigationManager { get; set; }
 
-    protected void OnParametersSetAsync()
+    [Parameter] public Article Article { get; set; }
+    [Parameter] public bool IsCode { get; set; }
+    [Parameter] public int CourseId { get; set; }
+
+    private List<Block> BlocksToShow = new();
+    private bool IsLoggedIn;
+    private bool IsLoading;
+    private bool IsCompleted;
+    private bool IsToast;
+    private string UserId;
+
+    protected async override Task OnParametersSetAsync()
     {
-        Console.WriteLine(Article.Title);
+        BlocksToShow = IsCode 
+        ? Article.Blocks.Where(x => x.IsCourseCodePage).ToList() 
+        : Article.Blocks.Where(x => !x.IsCourseCodePage).ToList();
+
+        var AuthSate = await AuthenticationState.GetAuthenticationStateAsync();
+
+        if (AuthSate.User.Identity.IsAuthenticated)
+        {
+            IsLoggedIn = true;
+            var claims = AuthSate.User;
+            UserId = claims.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            IsCompleted = await CheckIfProjectCompleted();
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -47,6 +156,54 @@
             await JSRuntime.InvokeVoidAsync("highlightCode");
         }
     }
+
+    private Task<bool> CheckIfProjectCompleted()
+    {
+        return ProjectService.IsProjectCompleted(UserId, Article.Id);
+    }
+
+    private async Task MarkAsRead()
+    {
+        IsLoading = true;
+
+        var project = new DashboardProject
+            {
+                AppUserId = UserId,
+                GithubUrl = "Not required",
+                ProjectId = Article.Id,
+                IsCompleted = true,
+                DateSubmitted = DateTimeOffset.UtcNow
+            };
+
+        var response = await ProjectService.PostArticle(project);
+
+        if (response == 1)
+        {
+            await ActivityService.PostUserActivity(new AppUserActivity
+                {
+                    ProjectId = Article.Id,
+                    AppUserId = UserId,
+                    DateSubmitted = DateTimeOffset.UtcNow,
+                    ActivityType = ActivityType.ArticleRead
+                });
+
+            var currentPoints = await UserService.GetCurrentXPs(UserId);
+
+            await UserService.AddExperiencePoints(UserId, Article.ExperiencePoints + currentPoints);
+        }
+
+        IsLoading = false;
+
+        IsCompleted = await CheckIfProjectCompleted();
+
+        NavigateToArticle(Article.CourseDisplayId.Value, Article.Id, false);
+
+    }
+
+    private void NavigateToArticle(int articleDisplayId, int articleId, bool isCode)
+    {
+        NavigationManager.NavigateTo($"/course/{CourseId}/article/{Article.CourseDisplayId}/{Article.Id}/{isCode}", forceLoad: true);
+    }
 }
 
 <style>
@@ -54,5 +211,9 @@
         padding-top: 20px;
         font-size: 22px;
         font-weight: 600;
+    }
+    
+    .card-course-content {
+        margin-top:100px !important;
     }
 </style>

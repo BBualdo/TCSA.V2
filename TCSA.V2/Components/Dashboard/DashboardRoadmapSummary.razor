@@ -1,0 +1,168 @@
+﻿@using TCSA.V2.Models
+@using TCSA.V2.Models.DTO
+<div class="card-header">
+    <h5>Roadmap Summary</h5>
+</div>
+<div class="progress-wrapper pt-2 px-4">
+    <div class="progress-container">
+        <div class="progress-bar" style="width: @ProgressPercentage%;"></div>
+        <div class="progress-text">@ProgressPercentage% Completed</div>
+    </div>
+</div>
+
+<div class="task-grid">
+    @foreach (var item in Items)
+    {
+        <div class="task-dot">
+            <div class="tooltip">@item.Title</div>
+            @if (item.Status)
+            {
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
+                    <rect width="16" height="16" fill="#0cc536" rx="2" ry="2" />
+                    <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" fill="white" />
+                </svg>
+            }
+            else
+            {
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-square" viewBox="0 0 16 16">
+                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" stroke="black" stroke-width="0.5" />
+                </svg>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public List<RoadmapSummaryItem> Items { get; set; }
+
+    private int ProgressPercentage => Items == null || Items.Count == 0
+        ? 0
+        : (int)(Items.Count(i => i.Status) / (double)Items.Count * 100);
+}
+
+<style>
+  .task-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+        gap: 10px;
+        margin: 20px;
+        position: relative;
+    }
+
+    .task-dot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        position: relative;
+        transition: transform 0.2s ease;
+    }
+
+        .task-dot:hover {
+            transform: scale(1.2);
+        }
+
+    /* Tooltip styling */
+    .tooltip {
+        position: absolute;
+        bottom: 50px; /* Adjust to position tooltip above the item */
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 6px 10px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        border-radius: 4px;
+        font-size: 12px;
+        text-align: center;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+        z-index: 9999;
+        pointer-events: none;
+    }
+
+    .task-dot:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Leftmost tooltip adjustment */
+    .task-dot:first-child .tooltip {
+        transform: translateX(0);
+        left: 0;
+    }
+
+    /* Rightmost tooltip adjustment */
+    .task-dot:last-child .tooltip {
+        transform: translateX(-100%);
+        left: 100%;
+    }
+
+    /* Second items tooltip adjustment for edges */
+    .task-dot:nth-child(2) .tooltip {
+        transform: translateX(-25%);
+        left: 25%;
+    }
+
+    .task-dot:nth-last-child(2) .tooltip {
+        transform: translateX(-75%);
+        left: 75%;
+    }
+
+    .completed-dot {
+        width: 24px;
+        height: 24px;
+    }
+
+    .incomplete-dot {
+        width: 24px;
+        height: 24px;
+    }
+
+    .progress-container {
+        width: 100%;
+        background-color: #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .progress-bar {
+        height: 40px;
+        background-color: green;
+        transition: width 0.4s ease-in-out;
+    }
+
+    .progress-text {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        color: black;
+        font-weight: bold;
+    }
+
+    .check-icon {
+        margin-top: 16px;
+    }
+</style>
+
+<script>
+    const progressBar = document.querySelector('.progress-bar');
+    const progressText = document.querySelector('.progress-text');
+
+    function updateProgress(percent) {
+        progressBar.style.width = percent + '%';
+        progressText.textContent = `${percent}% Completed`;
+    }
+
+    // Example usage:
+    updateProgress(85); // Updates to 85%
+</script>

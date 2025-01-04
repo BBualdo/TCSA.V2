@@ -288,34 +288,29 @@ public class PeerReviewService : IPeerReviewService
     // TODO CHANGE THIS, LOOKS LIKE A VERY EXPENSIVE QUERY
     public async Task<List<CodeReviewDetail>> GetCodeReviewDetails(string userId)
     {
-        var result = new List<CodeReviewDetail>();
-
         try
         {
             using (var context = _factory.CreateDbContext())
             {
-                var reviews = await context.UserReviews
+                var result = await context.UserReviews
                     .Where(x => x.AppUserId == userId)
+                    .Select(review => new
+                    {
+                        review.DashboardProject.ProjectId,
+                        review.DashboardProject.IsCompleted,
+                        review.DashboardProject.IsArchived,
+                        UserName = review.DashboardProject.AppUser.FirstName + " " + review.DashboardProject.AppUser.LastName
+                    })
+                    .Where(project => project.ProjectId != null) // Optional if you need to filter valid projects
+                    .Select(project => new CodeReviewDetail
+                    {
+                        ProjectId = project.ProjectId,
+                        IsCompleted = project.IsCompleted || project.IsArchived,
+                        UserName = project.UserName
+                    })
                     .ToListAsync();
 
-                foreach (var review in reviews)
-                {
-                    var project = context.DashboardProjects
-                        .AsNoTracking()
-                        .Include(x => x.AppUser)
-                        .SingleOrDefault(x => x.Id.Equals(review.DashboardProjectId));
-
-                    if (project != null)
-                    {
-                        result.Add(new CodeReviewDetail
-                        {
-                            ProjectId = project.ProjectId,
-                            IsCompleted = project.IsCompleted || project.IsArchived,
-                            UserName = $"{project.AppUser.FirstName + project.AppUser.LastName}"
-                        });
-                    }
-
-                }
+                return result;
             }
         }
         catch (Exception ex)
@@ -323,7 +318,6 @@ public class PeerReviewService : IPeerReviewService
             _logger.LogError(ex, $"Error in {nameof(GetCodeReviewDetails)}");
             return null;
         }
-
-        return result;
     }
+
 }

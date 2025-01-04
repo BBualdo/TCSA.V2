@@ -6,6 +6,7 @@ public class UserReview
 {
     public int Id { get; set; }
     public ApplicationUser User { get; set; }
+    public DashboardProject DashboardProject { get; set; }
     public string AppUserId { get; set; }
     public int DashboardProjectId { get; set; }
 }

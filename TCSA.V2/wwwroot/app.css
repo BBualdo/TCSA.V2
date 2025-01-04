@@ -164,6 +164,7 @@ h1:focus {
 }
 
 .btn-academy {
+    color: white;
     background-color: #1C236D;
 }
 
@@ -205,6 +206,21 @@ h1:focus {
     color: #fff !important;
     background-color: #1C236D; 
     border-color: #28a745; 
+}
+
+.card-completed {
+    background-color: green;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.alert-tcsa {
+    background-color: #1C236D;
+    color: #fff;
+}
+
+.advertisement {
+    font-size: 14px;
 }
 
 @media (max-width: 992px) {
@@ -291,9 +307,56 @@ h1:focus {
         width: 100% !important;
         margin-top: 100px;
     }
+
+    .dash-nav-menu {
+        display: none !important;
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.blink {
+    animation: blink 1s infinite;
 }
 
 @media (min-width: 992px) {
+    .fixed-column {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 16.6667%; /* 2 out of 12 columns */
+        height: 100vh;
+        overflow-x: hidden !important; /* Prevent horizontal scrolling */
+        overflow-y: hidden !important; /* Prevent vertical scrolling */
+    }
+
+    .fixed-left {
+        left: 0;
+    }
+
+    .fixed-right {
+        right: 0;
+    }
+
+    .scrollable-body {
+        margin-left: 16.6667%;
+        margin-right: 16.6667%;
+        overflow-y: auto;
+        height: 100vh;
+    }
+
     .fixed-column {
         overflow-y: hidden !important;
     }

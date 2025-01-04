@@ -12,6 +12,7 @@ public class ApplicationUser : IdentityUser
     public List<UserReview>? CodeReviewProjects { get; set; }
     public List<CommunityIssue>? Issues { get; set; }
     public List<Blog>? Blogs { get; set; }
+    public List<AppUserActivity> UserActivity { get; set; }
     public Level Level { get; set; }
     public int ExperiencePoints { get; set; }
     public int ReviewExperiencePoints { get; set; }

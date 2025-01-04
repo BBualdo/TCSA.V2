@@ -26,6 +26,7 @@ public class Article
 
 public class Block
 {
+    public bool IsCourseCodePage {  get; set; }
     public string? Title { get; set; }
     public string? ImgUrl { get; set; }
     public string? BookImgUrl { get; set; }
@@ -34,6 +35,8 @@ public class Block
 
 public class Paragraph
 {
+    public string? FontColor { get; set; }  
+    public string? BackgroundColor { get; set; }
     public bool IsPicture { get; set; } = false;
     public bool IsVideo { get; set; } = false;
     public bool IsCode { get; set; } = false;
